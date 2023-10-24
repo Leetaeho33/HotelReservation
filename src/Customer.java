@@ -5,4 +5,6 @@ public class Customer {
     private String customerPhoneNumber;
     private int budget;
     private ArrayList<Integer> uuid = new ArrayList<>();
+
+
 }
