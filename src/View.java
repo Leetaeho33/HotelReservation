@@ -55,6 +55,7 @@ public class View {
         System.out.println("1. 객실 예약하기       2. 예약 조회 및 취소     3. 호텔 관리");
     }
 
+
     public Customer Custominfo(){
 
         System.out.println("고객님의 성함을 입력하세요: ");
@@ -192,5 +193,6 @@ public class View {
 //
 //    }
 //    private void
+
 
 }
