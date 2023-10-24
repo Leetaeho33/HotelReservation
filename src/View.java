@@ -6,11 +6,8 @@ public class View {
     }
 
     private void showReservationableHotelRoom(String date){
-
     }
-
     private void greeting(){
-
     }
     private void
 }
