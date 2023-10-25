@@ -25,9 +25,5 @@ public class Reservation {
            return new Reservation(customer, room, date);
         }
     }
-
-    public void cancelReservation(){
-
-    }
 }
 // 예약 // 예약 취소 // 예약 확인 전체 예약확인

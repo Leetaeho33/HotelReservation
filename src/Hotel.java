@@ -14,7 +14,10 @@ public class Hotel {
 
     public void addReservation(Reservation reservation){
         reservationMap.put(reservation.getReservationNumber(), reservation);
-        // 호텔 자산 추가 로직 구현
+    }
+
+    public void removeReservation(String reservationNumber){
+        this.reservationMap.remove(reservationNumber);
     }
 }
 
