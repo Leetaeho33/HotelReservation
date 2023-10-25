@@ -7,21 +7,27 @@ public class Room {
     public int getRoomNumber() {
         return roomNumber;
     }
+
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
+
     public String getRoomSize() {
         return roomSize;
     }
+
     public void setRoomSize(String roomSize) {
         this.roomSize = roomSize;
     }
+
     public int getRoomPrice() {
         return roomPrice;
     }
+
     public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }
+
     public Room(int roomNumber, String roomSize, int roomPrice) {
         this.roomNumber = roomNumber;
         this.roomSize = roomSize;
