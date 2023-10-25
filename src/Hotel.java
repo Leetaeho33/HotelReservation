@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Hotel {
     private int asset;
@@ -12,25 +9,25 @@ public class Hotel {
         this.roomList.add(room);
     }
 
-    public void checkReservationCustomer(String uuId){
-        for(Map.Entry<String, Reservation> entry : reservationMap.entrySet()){
-            if(entry.getKey().equals(uuId)){
-                System.out.println("Name : " + entry.getValue().getCustomer().getCustomerName() + " | " +
-                        "Phone Number : " + entry.getValue().getCustomer().getCustomerPhoneNumber() + " | " +
-                        "Room Number : " + entry.getValue().getRoom().getRoomNumber() + " | " +
-                        "Reservation Date : " + entry.getValue().reservationDate + " | " +
-                        "UUID : " + entry.getKey());
+    public void checkReservationCustomer(String reservationNumber){
+        for (String s : reservationMap.keySet()) {
+            if(s.equals(reservationNumber)){
+                System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
+                        "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
+                        "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
+                        "ReservationNumber : " + reservationNumber
+                );
             }
         }
     }
 
     public void checkReservationHotel(){
-        for (Map.Entry<String, Reservation> entry : reservationMap.entrySet()) {
-            System.out.println("Name : " + entry.getValue().getCustomer().getCustomerName() + " | " +
-                    "Phone Number : " + entry.getValue().getCustomer().getCustomerPhoneNumber() + " | " +
-                    "Room Number : " + entry.getValue().getRoom().getRoomNumber() + " | " +
-                    "Reservation Date : " + entry.getValue().reservationDate + " | " +
-                    "UUID : " + entry.getKey());
+        for (String s : reservationMap.keySet()) {
+            System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
+                    "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
+                    "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
+                    "ReservationNumber : " + reservationMap.get(s).getReservationNumber()
+            );
         }
     }
 
