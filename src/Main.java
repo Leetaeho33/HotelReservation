@@ -13,23 +13,60 @@ public class Main {
         View consoleView = new View();
         init();
         while (true) {
-
             //시작 화면
-            consoleView.StartView();//예약, 예약조회,호텔관리 체크하는 분기
+            consoleView.selectMenu();//예약, 예약조회,호텔관리 체크하는 분기
             int checkCustom = sc.nextInt();
-            Customer customer = new Customer();
+            sc.nextLine();//버퍼지워두기
 
             switch (checkCustom) {
                 case 1:
-                    customer = consoleView.Custominfo(); // 고객정보를 입력받는 view
-                    consoleView.EmptyRoomView(hotel, customer);
-                    System.out.println("예약 기능 작동");
-                    break;
-                case 2: // 예약수정 및 조회
-                    //consoleView.searchReservationView(/*uuid*/);
+                    Customer customer = consoleView.getCustomerinfo(); // 고객정보를 입력받는 view
+                    while(true) {
+                        consoleView.printRoom(hotel);
+                        consoleView.selectRoom();
+                        int selectRoomNum = sc.nextInt();
+                        sc.nextLine();
+                        consoleView.confirmReservation(hotel, selectRoomNum);//
+                        int confirmCheck = sc.nextInt();
+                        sc.nextLine();
+                        if (confirmCheck == 1) {
+                            //예약리스트에 add하는 메서드
+                            consoleView.printReservationResult(customer);//
+                            break;
+                        } else if (confirmCheck == 2) {
+                            continue;
+                        }
+                        else{break;}
+                    }
+
                     break;
 
+                case 2: // 예약수정 및 조회
+                    consoleView.checkReservation();
+                    int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
+                    sc.nextLine();
+
+                    if(confirmReservationSearch == 1){break;}
+                    else if(confirmReservationSearch == 2) {
+                        consoleView.cancelReservation();
+                        int cancelConfirm = sc.nextInt();
+                        sc.nextLine();
+                        if (cancelConfirm == 1) {
+                            // 예약정보를 지우는 부분
+                            break;
+                        } else if (cancelConfirm == 2) {
+                            break;
+                            //시작화면으로
+                        } else {
+                            break;
+                        }
+                    }
+                    else {break;}
+
+
                 case 3: // 호텔관리
+                    consoleView.printAllReservation();
+                    sc.nextLine();
                     break;
 
                 default:
@@ -38,8 +75,6 @@ public class Main {
             }
         }
     }
-
-
     public static void init() {
         Room standard_101 = new Room(101, "Standard", 5);
         Room standard_102 = new Room(102, "Standard", 5);
@@ -89,25 +124,3 @@ public class Main {
 
 
 }
-
-//1) 예약기능 // 3명(태호/규정 소희)
-//
-// - 예약 (예약 실패 경우 추가)
-//
-// - 예약 확인
-//
-// - 예약 취소
-//
-// - 전체 예약 확인
-//
-//- 예약 가능 객실 리스트 조회기능
-//- 객실리스트/예약 가능한 객실 리스트/ 예약 된 예약
-//2) 뷰 // 2명 (준영 /유섭)
-//
-//- 고객 정보 입력페이지(고객 정보 입력)
-//- 예약 페이지에서 (예약, 예약 확인) 1번 누르면 예약, 2번 누르면 예약 확인페이지
-//- 예약 날짜 페이지 ( 날짜입력)
-//- 예약 가능 객실 페이지 ( 예약 가능한 객실 리스트 보여주기)
-//- 예약 확인 페이지(예약) - 예약 결정, 예약 실패
-//- 전체예약 확인 페이지
-//날짜에 따른 객실 리스트가 필요가 없다.
