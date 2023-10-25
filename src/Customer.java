@@ -4,7 +4,7 @@ public class Customer {
     private String customerName;
     private String customerPhoneNumber;
     private int budget;
-    private ArrayList<String> uuid = new ArrayList<>();
+    private ArrayList<String> uuid = new ArrayList<>(); // 이것도 뭔가... 한번의 예약에 한개의 uuid를 갖을것같은데...
 
     public Customer(String customerName, String customerPhoneNumber, int budget) {
         this.customerName = customerName;
