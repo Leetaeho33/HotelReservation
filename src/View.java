@@ -1,5 +1,3 @@
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 
@@ -18,7 +16,7 @@ import java.util.Scanner;
 //      |
 //입력: 1. 예   2. 취소--------스크린:객실화면으로 돌아가기
 //       |
-//스크린: 예약 완료 && 초기화면으로 돌아가기
+//스크린: 예약 완료 && 초기화면으로 돌아가기x
 
 
 //1) 예약기능 // 3명(태호/규정 소희)
