@@ -31,7 +31,7 @@ public class View {
     public void printRoom(Hotel hotel) {
         
         System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
-        for (Room ht_rm : hotel.roomList) {
+        for (Room ht_rm : hotel.getRoomList()) {
             System.out.printf("%-8d%-16s%-10d\n", ht_rm.getRoomNumber(), ht_rm.getRoomSize(), ht_rm.getRoomPrice());
         }
     }

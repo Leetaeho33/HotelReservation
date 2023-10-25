@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Customer {
     private String customerName;
     private String customerPhoneNumber;
@@ -15,6 +12,17 @@ public class Customer {
         this.budget = budget;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getCustomerPhoneNumber() {
+        return customerPhoneNumber;
+    }
+
+    public String getReservationNumber() {
+        return reservationNumber;
+    }
 
     public int getBudget() {
         return budget;
