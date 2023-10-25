@@ -9,12 +9,9 @@ public class Main {
     Hotel hotel = new Hotel();
     public static void main(String[] args) {
 
-
         Scanner sc = new Scanner(System.in);
         View consoleView = new View();
         Hotel hotel = new Hotel();
-
-
 
 
         while (true) {
@@ -48,7 +45,6 @@ public class Main {
             }
         }
     }
-
 
     public void init () {
         Room standard_101 = new Room(101, "Standard", 5);
@@ -95,9 +91,6 @@ public class Main {
         hotel.addRoom(suite_404);
         hotel.addRoom(suite_405);
     }
-
-
-
 }
 
 //1) 예약기능 // 3명(태호/규정 소희)
