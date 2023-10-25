@@ -2,13 +2,21 @@ import java.util.*;
 
 public class Hotel {
     private int asset;
-    List<Room> roomList = new ArrayList<>();
-    Map<String, Reservation> reservationMap = new HashMap<>();
+    private List<Room> roomList = new ArrayList<>();
+    private Map<String, Reservation> reservationMap = new HashMap<>();
 
     public void addRoom(Room room){
         this.roomList.add(room);
     }
 
+
+    public void addReservation(Reservation reservation){
+        reservationMap.put(reservation.getReservationNumber(), reservation);
+    }
+
+    public void removeReservation(String reservationNumber){
+        this.reservationMap.remove(reservationNumber);
+    }
     public void checkReservationCustomer(String reservationNumber){
         for (String s : reservationMap.keySet()) {
             if(s.equals(reservationNumber)){
@@ -30,7 +38,6 @@ public class Hotel {
             );
         }
     }
-
 
 }
 
