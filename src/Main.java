@@ -6,13 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    Hotel hotel = new Hotel();
+    static Hotel hotel = new Hotel();
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         View consoleView = new View();
-        Hotel hotel = new Hotel();
-
+        init();
         while (true) {
+
             //시작 화면
             consoleView.StartView();//예약, 예약조회,호텔관리 체크하는 분기
             int checkCustom = sc.nextInt();
@@ -24,9 +25,8 @@ public class Main {
                     consoleView.EmptyRoomView(hotel, customer);
                     System.out.println("예약 기능 작동");
                     break;
-
                 case 2: // 예약수정 및 조회
-                    consoleView.searchReservationView(/*uuid*/);
+                    //consoleView.searchReservationView(/*uuid*/);
                     break;
 
                 case 3: // 호텔관리
@@ -40,7 +40,7 @@ public class Main {
     }
 
 
-    public void init () {
+    public static void init() {
         Room standard_101 = new Room(101, "Standard", 5);
         Room standard_102 = new Room(102, "Standard", 5);
         Room standard_103 = new Room(103, "Standard", 5);
