@@ -6,6 +6,11 @@ public class Customer {
     private int budget;
     private ArrayList<String> uuid = new ArrayList<>();
 
+    public Customer(String customerName, String customerPhoneNumber, int budget) {
+        this.customerName = customerName;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.budget = budget;
+    }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
