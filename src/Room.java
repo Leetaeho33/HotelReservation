@@ -25,7 +25,7 @@ public class Room {
     public Room(int roomNumber, String roomSize, int roomPrice) {
         this.roomNumber = roomNumber;
         this.roomSize = roomSize;
-        this.roomPirce = roomPirce;
+        this.roomPrice = roomPrice;
     }
 
 }
