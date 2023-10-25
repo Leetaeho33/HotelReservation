@@ -6,6 +6,8 @@ public class Customer {
     private int budget;
     private ArrayList<String> uuid = new ArrayList<>();
 
+    public Customer() {} // 디폴트 생성자
+
     public Customer(String customerName, String customerPhoneNumber, int budget) {
         this.customerName = customerName;
         this.customerPhoneNumber = customerPhoneNumber;
