@@ -1,12 +1,13 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
     private String customerName;
     private String customerPhoneNumber;
     private int budget;
-    private ArrayList<String> uuid = new ArrayList<>();
+    private String reservationNumber;
 
-    public Customer() {} // 디폴트 생성자
+   //  public Customer() {} // 디폴트 생성자
 
     public Customer(String customerName, String customerPhoneNumber, int budget) {
         this.customerName = customerName;
@@ -14,31 +15,8 @@ public class Customer {
         this.budget = budget;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
-    }
-
-    public void setBudget(int budget) {
-        this.budget = budget;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
-    }
 
     public int getBudget() {
         return budget;
-    }
-
-    public void addUuid(String uuid){
-        this.uuid.add(uuid);
     }
 }

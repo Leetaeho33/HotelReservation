@@ -8,14 +8,9 @@ import java.util.List;
 public class Main {
     Hotel hotel = new Hotel();
     public static void main(String[] args) {
-
-
         Scanner sc = new Scanner(System.in);
         View consoleView = new View();
         Hotel hotel = new Hotel();
-
-
-
 
         while (true) {
             //시작 화면
@@ -24,7 +19,6 @@ public class Main {
             Customer customer = new Customer();
 
             switch (checkCustom) {
-
                 case 1:
                     customer = consoleView.Custominfo(); // 고객정보를 입력받는 view
                     consoleView.EmptyRoomView(hotel, customer);
@@ -35,16 +29,12 @@ public class Main {
                     consoleView.searchReservationView(/*uuid*/);
                     break;
 
-
                 case 3: // 호텔관리
                     break;
-
 
                 default:
                     System.out.println("해당하지않는 번호입니다.");
                     break;
-
-
             }
         }
     }
