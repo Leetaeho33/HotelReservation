@@ -32,7 +32,7 @@ public class Main {
                     break;
 
                 case 2: // 예약수정 및 조회
-                    consoleView.searchReservationView(/*uuid*/);
+                    //consoleView.searchReservationView(/*uuid*/);
                     break;
 
 
