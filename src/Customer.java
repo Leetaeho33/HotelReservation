@@ -15,8 +15,8 @@ public class Customer {
         this.budget = budget;
     }
 
-
     public int getBudget() {
         return budget;
     }
+
 }
