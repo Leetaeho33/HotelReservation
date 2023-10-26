@@ -30,6 +30,7 @@ public class Hotel {
     public void addReservation(Reservation reservation) {
         this.reservationMap.put(reservation.getReservationNumber(), reservation);
         this.reservationCount += 1;
+        this.addAsset();
     }
 
     public void removeReservation(String reservationNumber) {
@@ -40,11 +41,6 @@ public class Hotel {
         if (this.reservationMap.containsKey(reservationNumber)) {
             for (String s : reservationMap.keySet()) {
                 if (s.equals(reservationNumber)) {
-//                    System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
-//                            "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
-//                            "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
-//                            "ReservationNumber : " + reservationNumber
-//                    );
                     return reservationMap.get(s);
                 }
             }
@@ -74,20 +70,16 @@ public class Hotel {
         ZoneId zoneId = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
         LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
-
         List<Room> possibleRoomList = new ArrayList<>();
         for (Room r : this.roomList) {
             if(r.getRoomDateList().isEmpty()){
                 possibleRoomList.add(r);
             } else {
                 for (Date d : r.getRoomDateList()) {
-
                     Instant instant1 = d.toInstant();
                     // Instant를 ZoneId와 LocalDate로 변환
                     ZoneId zoneId1 = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
                     LocalDate locald = instant.atZone(zoneId1).toLocalDate();
-
-
                     if(locald.compareTo(localDate) != 0){
                         possibleRoomList.add(r);
                     }

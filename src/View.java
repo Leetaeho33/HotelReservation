@@ -32,12 +32,12 @@ public class View {
     }
 
     public void printRoom(Hotel hotel) {
-//        while (true) {
-//            System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
-//            //customerDate = inputDate();
-//            //if (customerDate != null) break;
-//        }
-        this.customerDate = new Date();
+        while (true) {
+            System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
+            this.customerDate = inputDate();
+            if (customerDate != null) break;
+        }
+
         System.out.println("customerDate:" + customerDate);
         System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
         List<Room> canPossibleRoom =  hotel.getPossibleRoomList(customerDate);
@@ -94,7 +94,6 @@ public class View {
         System.out.println("*** 예약이 완료되었습니다.***\n");
         System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
         hotel.addReservation(newReservation);
-        //customer에 예약번호 세팅
     }
 
     public void checkReservation(Hotel hotel) {
@@ -104,10 +103,10 @@ public class View {
             Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
             if(preReservation != null) {
                 System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
-                System.out.printf("%-10s %-10s %-10d\n", preReservation.getCustomer().getCustomerName(), preReservation.getCustomer().getCustomerPhoneNumber(), preReservation.getRoom().getRoomNumber());
+                System.out.printf("%-10s %-20s %-30d\n", preReservation.getCustomer().getCustomerName(), preReservation.getCustomer().getCustomerPhoneNumber(), preReservation.getRoom().getRoomNumber());
                 break;
             }
-            else if(preReservation == null){
+            else {
                 System.out.println("잘못된 예약번호입니다.");
             }
         }
@@ -126,9 +125,11 @@ public class View {
         System.out.println("*** 예약번호를 입력해주세요 ***\n");
         custom_uuid = sc.nextLine();
         Reservation canceledReservation = hotel.checkReservationCustomer(custom_uuid);
-        if(canceledReservation != null) {
+        if(canceledReservation == null) {
                 System.out.println("잘못된 예약번호입니다.");
-                break;
+        }
+        else{
+            break;
             }
         }
         hotel.removeReservation(custom_uuid);
