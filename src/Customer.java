@@ -14,12 +14,15 @@ public class Customer {
         this.customerPhoneNumber = customerPhoneNumber;
         this.budget = budget;
     }
+
     public String getCustomerName() {
         return customerName;
     }
+
     public String getCustomerPhoneNumber() {
         return customerPhoneNumber;
     }
+
     public int getBudget() {
         return budget;
     }

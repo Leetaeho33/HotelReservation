@@ -27,12 +27,12 @@ public class Main {
                         consoleView.selectRoom();
                         int selectRoomNum = sc.nextInt();
                         sc.nextLine();
-                        Room customerChoiceRoom = consoleView.confirmReservation(hotel, selectRoomNum);//
+                        consoleView.confirmReservation(hotel, selectRoomNum);//
                         int confirmCheck = sc.nextInt();
                         sc.nextLine();
                         if (confirmCheck == 1) {
                             //예약리스트에 add하는 메서드
-                            consoleView.addReservation(hotel,customer,customerChoiceRoom);
+                            consoleView.addReservation(hotel,customer,selectRoomNum);
                             break;
                         } else if (confirmCheck == 2) {
                             continue;
@@ -40,7 +40,6 @@ public class Main {
                             break;
                         }
                     }
-
                     break;
 
                 case 2: // 예약수정 및 조회

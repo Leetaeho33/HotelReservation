@@ -13,7 +13,15 @@ public class Hotel {
         this.roomList.add(room);
     }
 
+    public Room getRoom(int roomNumber){
+        for (Room room : roomList) {
+            if (room.getRoomNumber() == roomNumber) {
+                return room;
+            }
+        }
+        return null;
 
+    }
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
     }
