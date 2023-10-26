@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Hotel {
     private int asset;
+    private int reservationCount = 0;
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
 
@@ -52,5 +53,15 @@ public class Hotel {
         }
     }
 
+    public int getAsset(){
+        return asset;
+    }
+
+    public void addAsset(){
+        for (String s : reservationMap.keySet()) {
+            this.asset += reservationMap.get(s).getRoom().getRoomPrice();
+            this.reservationCount++;
+        }
+    }
 }
 
