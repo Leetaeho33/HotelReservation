@@ -90,7 +90,7 @@ public class View {
         System.out.println("호텔의 전체 예약 건수 : %d");
         System.out.println("보유자산: %d");
 
-        System.out.println("다시 돌아거려면 아무키나 입력하세요");
+        System.out.println("다시 돌아가려면 아무키나 입력하세요");
 
     }
 
