@@ -22,6 +22,10 @@ public class Room {
     public int getRoomPrice() {
         return roomPrice;
     }
+
+    public ArrayList<Date> getRoomDateList() {
+        return roomDateList;
+    }
     public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }

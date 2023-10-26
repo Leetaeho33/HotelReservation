@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,13 +30,24 @@ public class View {
     }
 
     public void printRoom(Hotel hotel) {
-
-
-        System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
-        for (Room ht_rm : hotel.getRoomList()) {
-            System.out.printf("%-8d%-16s%-10d\n", ht_rm.getRoomNumber(), ht_rm.getRoomSize(), ht_rm.getRoomPrice());
+        Date customerDate;
+        while (true) {
+            System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
+            customerDate = inputDate();
+            if (customerDate != null) break;
         }
+
+        System.out.println("*** 예약하실 수 g있는 객실의 목록입니다. ***\n");
+        List<Room> canPossibleRoom =  hotel.getPossibleRoomList(customerDate);
+        for (Room hotelRoom : canPossibleRoom) {
+            System.out.printf("%-8d%-16s%-10d\n", hotelRoom.getRoomNumber(), hotelRoom.getRoomSize(), hotelRoom.getRoomPrice());
+        }
+
     }
+
+
+
+
 
     public void selectRoom() {
         System.out.println("*** 원하시는 객실을 선택해주세요. ***\n");
@@ -63,8 +76,8 @@ public class View {
     public void printReservationRoom(Hotel hotel, int choice) {
         //선택한 객실 정보 출력
         Room choiceRoom = hotel.getRoom(choice);
-        for (Room ht_rm : hotel.getRoomList()) {
-            if (ht_rm.getRoomNumber() == choice) {
+        for (Room hotelRoom : hotel.getRoomList()) {
+            if (hotelRoom.getRoomNumber() == choice) {
                 System.out.printf("%-8d%-16s%-10d\n", choiceRoom.getRoomNumber(), choiceRoom.getRoomSize(), choiceRoom.getRoomPrice());
             }
         }
@@ -74,12 +87,11 @@ public class View {
     }
 
 
-    public void addReservation(Hotel hotel, Customer customer, int choiceNum) {
-        //System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
+    public void addReservation(Hotel hotel, Customer customer, int roomChoiceNum) {
+
         Date nowDate = new Date();//String을 입력받아서 Date형식으로 반환
         Reservation tempReservation = new Reservation();
-        Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(choiceNum), nowDate);
-        //null이 들어오면 초기화면이나 다른화면으로 돌아가게 짠다.
+        Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(roomChoiceNum), nowDate);
 
         if(newReservation == null) {return;}
 
@@ -90,13 +102,17 @@ public class View {
     }
 
     public void checkReservation(Hotel hotel) {
-
-        System.out.println("*** 예약번호를 입력해주세요 ***\n");
-        String custom_uuid = sc.nextLine();
-        System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
-        hotel.checkReservationCustomer(custom_uuid);
-
-        System.out.println("1. 예약 확인         2. 예약 취소\n");
+        while(true) {
+            System.out.println("*** 예약번호를 입력해주세요 ***\n");
+            String custom_uuid = sc.nextLine();
+            System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
+            Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
+            if(preReservation != null) {
+                System.out.println("잘못된 예약번호입니다.");
+                break;
+            }
+        }
+        //System.out.println("1. 예약 확인         2. 예약 취소\n");
     }
 
     public void cancelConfirmReservation() {
@@ -105,8 +121,16 @@ public class View {
     }
 
     public void cancelReservation(Hotel hotel){
+        String custom_uuid;
+        while(true){
         System.out.println("*** 예약번호를 입력해주세요 ***\n");
-        String custom_uuid = sc.nextLine();
+        custom_uuid = sc.nextLine();
+        Reservation canceledReservation = hotel.checkReservationCustomer(custom_uuid);
+        if(canceledReservation != null) {
+                System.out.println("잘못된 예약번호입니다.");
+                break;
+            }
+        }
         hotel.removeReservation(custom_uuid);
     }
 
@@ -114,26 +138,27 @@ public class View {
         System.out.println("*** 호텔의 전체 예약 목록입니다. ***\n");
         hotel.checkReservationHotel();
         System.out.println("\n");
-        System.out.printf("호텔의 전체 예약 건수 : %d\n");
+        System.out.printf("호텔의 전체 예약 건수 : %d\n", hotel.getReservationCount());
         System.out.printf("보유자산: %d\n",hotel.getAsset());
 
         System.out.println("다시 돌아가려면 아무키나 입력하세요\n");
     }
 
 
-//    public Date inputDate(){
-//        String customDate = sc.nextLine();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date date = dateFormat.parse(customDate); // 문자열을 Date로 변환
-//            String date_str = dateFormat.format(date);
-//            System.out.println("고객님이 선택하신 날짜는 : " + date_str + "입니다.\n");
-//            return date;
-//        } catch (ParseException e) {
-//            System.out.println("올바른 날짜 형식이 아닙니다.\n");
-//        }
-//        return null;
-//    }
+
+    public Date inputDate(){
+        String customDate = sc.nextLine();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(customDate); // 문자열을 Date로 변환
+            String date_str = dateFormat.format(date);
+            System.out.println("고객님이 선택하신 날짜는 : " + date_str + "입니다.\n");
+            return date;
+        } catch (ParseException e) {
+            System.out.println("올바른 날짜 형식이 아닙니다.\n");
+        }
+        return null;
+    }
 }
 
 
