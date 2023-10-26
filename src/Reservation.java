@@ -6,6 +6,9 @@ public class Reservation {
     private Date reservationDate;
     private String reservationNumber;
 
+    public Reservation() {
+    }
+
     private Reservation(Customer customer, Room room, Date reservationDate) {
         this.customer = customer;
         this.room = room;
