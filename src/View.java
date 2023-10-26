@@ -5,7 +5,6 @@ import java.util.Date;
 
 
 public class View {
-
     Scanner sc = new Scanner(System.in);
 
     public void selectMenu() {
@@ -29,7 +28,6 @@ public class View {
     }
 
     public void printRoom(Hotel hotel) {
-
         System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
         for (Room ht_rm : hotel.getRoomList()) {
             System.out.printf("%-8d%-16s%-10d\n", ht_rm.getRoomNumber(), ht_rm.getRoomSize(), ht_rm.getRoomPrice());
@@ -43,7 +41,6 @@ public class View {
 
     public void confirmReservation(Hotel hotel, int choice) {
         //선택한 객실 정보 출력
-
         Room choiceRoom = hotel.getRoom(choice);
 
         for (Room ht_rm : hotel.getRoomList()) {
@@ -71,9 +68,8 @@ public class View {
         System.out.println("*** 예약번호를 입력해주세요 ***");
         String custom_uuid = sc.nextLine();
 
-
-        hotel.checkReservationCustomer(custom_uuid);
         System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***");
+        hotel.checkReservationCustomer(custom_uuid);
         //[ 예약자 이름 ]
         //[ 예약자 전화번호 ]
         //[ 예약 일시 ]
@@ -87,7 +83,7 @@ public class View {
         System.out.println("1. 확인         2. 취소");
     }
 
-    public void cancelReservation(Hotel hotel){
+    public void cancelReservation(Hotel hotel) {
     }
 
     public void printAllReservation(Hotel hotel) {
