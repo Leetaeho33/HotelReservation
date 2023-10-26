@@ -45,5 +45,8 @@ public class Reservation {
         return room;
     }
 
+    public Date getReservationDate() {
+        return reservationDate;
+    }
 }
 // 예약 // 예약 취소 // 예약 확인 전체 예약확인

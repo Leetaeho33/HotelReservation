@@ -33,20 +33,19 @@ public class Hotel {
         this.reservationMap.remove(reservationNumber);
     }
 
-    public void checkReservationCustomer(String reservationNumber) {
+    public Reservation checkReservationCustomer(String reservationNumber) {
         if (reservationMap.containsKey(reservationNumber)) {
             for (String s : reservationMap.keySet()) {
                 if (s.equals(reservationNumber)) {
-                    System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
-                            "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
-                            "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
-                            "ReservationNumber : " + reservationNumber
-                    );
+//                    System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
+//                            "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
+//                            "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
+//                            "ReservationNumber : " + reservationNumber
+//                    );
+                    return reservationMap.get(s);
                 }
             }
-        } else {
-            System.out.println("예약번호에 해당하는 예약이 존재하지 않습니다.");
-        }
+        } return null;
     }
 
     public void checkReservationHotel() {
@@ -54,10 +53,12 @@ public class Hotel {
             System.out.println("예약된 내역이 없습니다.");
         } else {
             for (String s : reservationMap.keySet()) {
-                System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
-                        "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
-                        "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
-                        "ReservationNumber : " + reservationMap.get(s).getReservationNumber()
+                System.out.println(
+                        "예약날짜 : " + reservationMap.get(s).getReservationDate() + " | " +
+                        "예약자 성명 : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
+                        "전화번호 : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
+                        "객실호수 : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
+                        "예약번호 : " + reservationMap.get(s).getReservationNumber()
                 );
             }
         }
