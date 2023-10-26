@@ -23,13 +23,13 @@ public class Room {
         this.roomPrice = roomPrice;
     }
     public boolean checkRoomReservation(Date date){         //룸 예약 가능 확인 메소드
-        if(roomDateList.contains(date)){                    //룸의 date list에 매개변수 date값이있냐?
+        if(this.roomDateList.contains(date)){                    //룸의 date list에 매개변수 date값이있냐?
             return false;                                   //있으면 예약 불가능!
         }else {
             return true;                                    //없으면 예약 가능
         }
     }
     public void addRoomDate(Date date){
-        roomDateList.add(date);
+        this.roomDateList.add(date);
     }
 }
