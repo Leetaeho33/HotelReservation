@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Hotel {
     private int asset;
-
+    Reservation reservation;
     public List<Room> getRoomList() {
         return roomList;
     }
@@ -23,7 +23,6 @@ public class Hotel {
         }
         return null;
     }
-
 
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);

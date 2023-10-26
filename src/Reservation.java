@@ -22,7 +22,7 @@ public class Reservation {
 
 
     public Reservation makeReservation(Customer customer, Room room, Date date) {
-        if (this.customer.getBudget() < this.room.getRoomPrice()) {
+        if (customer.getBudget() < this.room.getRoomPrice()) {
             System.out.println("소지금이 부족합니다.");
             return null;
         } else {
