@@ -2,6 +2,11 @@ import java.util.*;
 
 public class Hotel {
     private int asset;
+
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
 
