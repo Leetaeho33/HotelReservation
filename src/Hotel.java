@@ -64,6 +64,18 @@ public class Hotel {
         }
     }
 
+    public List<Room> getPossibleRoomList(Date date){
+        List<Room> possibleRoomList = new ArrayList<>();
+        for (Room r : roomList) {
+            for (Date d : r.getRoomDateList()) {
+                if(!d.equals(date)){
+                    possibleRoomList.add(r);
+                }
+            }
+        }
+        return possibleRoomList;
+    }
+
     public int getAsset() {
         return asset;
     }
