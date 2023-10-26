@@ -20,9 +20,8 @@ public class Hotel {
             }
         }
         return null;
+
     }
-
-
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
     }

@@ -9,6 +9,7 @@ public class Reservation {
     public Reservation() {
     }
 
+
     private Reservation(Customer customer, Room room, Date reservationDate) {
         this.customer = customer;
         this.room = room;
@@ -22,7 +23,7 @@ public class Reservation {
 
 
     public Reservation makeReservation(Customer customer, Room room, Date date) {
-        if (this.customer.getBudget() < this.room.getRoomPrice()) {
+        if (customer.getBudget() < room.getRoomPrice()) {
             System.out.println("소지금이 부족합니다.");
             return null;
         } else {
