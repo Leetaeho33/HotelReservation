@@ -60,16 +60,19 @@ public class View {
         System.out.println("1. 예약 확인   2. 방 재선택   3. 전체취소\n");
     }
 
-    public void addReservation(Hotel hotel,Customer customer,int choiceNum){
-            //System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
-            Date nowDate = new Date();//String을 입력받아서 Date형식으로 반환
-            Reservation tempReservation = new Reservation();
-            Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(choiceNum), nowDate);
-            System.out.println("*** 예약이 완료되었습니다.***\n");
-            System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
-            hotel.addReservation(newReservation);
-            //customer에 예약번호 세팅
-        }
+    public void addReservation(Hotel hotel, Customer customer, int choiceNum) {
+        //System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
+        Date nowDate = new Date();//String을 입력받아서 Date형식으로 반환
+        Reservation tempReservation = new Reservation();
+        Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(choiceNum), nowDate);
+        System.out.println("*** 예약이 완료되었습니다.***\n");
+        System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
+        hotel.addReservation(newReservation);
+        //customer에 예약번호 세팅
+        System.out.println("test");
+    }
+
+
 
 
 
