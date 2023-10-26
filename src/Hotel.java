@@ -1,3 +1,6 @@
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class Hotel {
@@ -25,7 +28,7 @@ public class Hotel {
     }
 
     public void addReservation(Reservation reservation) {
-        reservationMap.put(reservation.getReservationNumber(), reservation);
+        this.reservationMap.put(reservation.getReservationNumber(), reservation);
         this.reservationCount += 1;
     }
 
@@ -34,7 +37,7 @@ public class Hotel {
     }
 
     public Reservation checkReservationCustomer(String reservationNumber) {
-        if (reservationMap.containsKey(reservationNumber)) {
+        if (this.reservationMap.containsKey(reservationNumber)) {
             for (String s : reservationMap.keySet()) {
                 if (s.equals(reservationNumber)) {
 //                    System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
@@ -65,11 +68,29 @@ public class Hotel {
     }
 
     public List<Room> getPossibleRoomList(Date date){
+
+        Instant instant = date.toInstant();
+        // Instant를 ZoneId와 LocalDate로 변환
+        ZoneId zoneId = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
+        LocalDate localDate = instant.atZone(zoneId).toLocalDate();
+
+
         List<Room> possibleRoomList = new ArrayList<>();
-        for (Room r : roomList) {
-            for (Date d : r.getRoomDateList()) {
-                if(!d.equals(date)){
-                    possibleRoomList.add(r);
+        for (Room r : this.roomList) {
+            if(r.getRoomDateList().isEmpty()){
+                possibleRoomList.add(r);
+            } else {
+                for (Date d : r.getRoomDateList()) {
+
+                    Instant instant1 = d.toInstant();
+                    // Instant를 ZoneId와 LocalDate로 변환
+                    ZoneId zoneId1 = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
+                    LocalDate locald = instant.atZone(zoneId1).toLocalDate();
+
+
+                    if(locald.compareTo(localDate) != 0){
+                        possibleRoomList.add(r);
+                    }
                 }
             }
         }
