@@ -30,7 +30,6 @@ public class View {
         sc.nextLine();
 
         return new Customer(customName, customPhoneNumber, customBudget);
-
     }
 
     public void printRoom(Hotel hotel) {
@@ -72,11 +71,6 @@ public class View {
         System.out.println("test");
     }
 
-
-
-
-
-
     public void checkReservation(Hotel hotel) {
 
         System.out.println("*** 예약번호를 입력해주세요 ***");
@@ -91,26 +85,17 @@ public class View {
         //[ 예약 룸 정보 ]
 
         System.out.println("1. 예약 확인         2. 예약 취소");
-
-
     }
 
-
     public void cancelConfirmReservation() {
-
         System.out.println(" *** 정말로 취소하시겠습니까? ***");
         System.out.println("1. 확인         2. 취소");
     }
 
     public void cancelReservation(Hotel hotel){
-
     }
 
-
-
-
     public void printAllReservation(Hotel hotel) {
-
         System.out.println("*** 호텔의 전체 예약 목록입니다. ***");
         hotel.checkReservationHotel();
         System.out.println("\n");
@@ -134,11 +119,6 @@ public class View {
 //        }
 //        return null;
 //    }
-
-
-
-
-
 }
 
 

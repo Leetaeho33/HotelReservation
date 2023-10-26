@@ -15,6 +15,7 @@ public class Customer {
         this.budget = budget;
     }
 
+
     public String getCustomerName() {
         return customerName;
     }
