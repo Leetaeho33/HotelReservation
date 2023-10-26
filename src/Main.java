@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Main {
     static Hotel hotel = new Hotel();
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -21,7 +22,7 @@ public class Main {
             switch (checkCustom) {
                 case 1:
                     Customer customer = consoleView.getCustomerinfo(); // 고객정보를 입력받는 view
-                    while(true) {
+                    while (true) {
                         consoleView.printRoom(hotel);
                         consoleView.selectRoom();
                         int selectRoomNum = sc.nextInt();
@@ -35,8 +36,9 @@ public class Main {
                             break;
                         } else if (confirmCheck == 2) {
                             continue;
+                        } else {
+                            break;
                         }
-                        else{break;}
                     }
 
                     break;
@@ -46,8 +48,9 @@ public class Main {
                     int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
                     sc.nextLine();
 
-                    if(confirmReservationSearch == 1){break;}
-                    else if(confirmReservationSearch == 2) {
+                    if (confirmReservationSearch == 1) {
+                        break;
+                    } else if (confirmReservationSearch == 2) {
                         consoleView.cancelReservation();
                         int cancelConfirm = sc.nextInt();
                         sc.nextLine();
@@ -60,8 +63,9 @@ public class Main {
                         } else {
                             break;
                         }
+                    } else {
+                        break;
                     }
-                    else {break;}
 
 
                 case 3: // 호텔관리
@@ -75,6 +79,7 @@ public class Main {
             }
         }
     }
+
     public static void init() {
         Room standard_101 = new Room(101, "Standard", 5);
         Room standard_102 = new Room(102, "Standard", 5);
@@ -120,7 +125,6 @@ public class Main {
         hotel.addRoom(suite_404);
         hotel.addRoom(suite_405);
     }
-
 
 
 }

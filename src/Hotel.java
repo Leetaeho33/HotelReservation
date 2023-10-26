@@ -5,21 +5,35 @@ public class Hotel {
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
 
-    public void addRoom(Room room){
+    public List<Room> getRoomList() {
+        return roomList;
+    }
+
+    public void addRoom(Room room) {
         this.roomList.add(room);
     }
 
+    public Room getRoom(int roomNumber){
+        for (Room room : roomList) {
+            if (room.getRoomNumber() == roomNumber) {
+                return room;
+            }
+        }
+        return null;
+    }
 
-    public void addReservation(Reservation reservation){
+
+    public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
     }
 
-    public void removeReservation(String reservationNumber){
+    public void removeReservation(String reservationNumber) {
         this.reservationMap.remove(reservationNumber);
     }
-    public void checkReservationCustomer(String reservationNumber){
+
+    public void checkReservationCustomer(String reservationNumber) {
         for (String s : reservationMap.keySet()) {
-            if(s.equals(reservationNumber)){
+            if (s.equals(reservationNumber)) {
                 System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
                         "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
                         "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
@@ -29,7 +43,7 @@ public class Hotel {
         }
     }
 
-    public void checkReservationHotel(){
+    public void checkReservationHotel() {
         for (String s : reservationMap.keySet()) {
             System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
                     "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
