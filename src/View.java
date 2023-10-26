@@ -104,7 +104,7 @@ public class View {
             Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
             if(preReservation != null) {
                 System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
-                System.out.printf("%-10d %-10s %-10s\n", preReservation.getCustomer().getCustomerName(), preReservation.getCustomer().getCustomerPhoneNumber(), preReservation.getRoom().getRoomNumber());
+                System.out.printf("%-10s %-10s %-10d\n", preReservation.getCustomer().getCustomerName(), preReservation.getCustomer().getCustomerPhoneNumber(), preReservation.getRoom().getRoomNumber());
                 break;
             }
             else if(preReservation == null){
