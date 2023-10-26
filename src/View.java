@@ -64,7 +64,6 @@ public class View {
     }
 
     public void checkReservation(Hotel hotel) {
-
         System.out.println("*** 예약번호를 입력해주세요 ***");
         String custom_uuid = sc.nextLine();
 

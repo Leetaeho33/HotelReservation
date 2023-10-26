@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Hotel {
-    private int asset;
+    private int asset = 0;
     private int reservationCount = 0;
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
@@ -26,6 +26,7 @@ public class Hotel {
 
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
+        this.reservationCount += 1;
     }
 
     public void removeReservation(String reservationNumber) {
@@ -69,8 +70,11 @@ public class Hotel {
     public void addAsset() {
         for (String s : reservationMap.keySet()) {
             this.asset += reservationMap.get(s).getRoom().getRoomPrice();
-            this.reservationCount++;
         }
+    }
+
+    public int getReservationCount() {
+        return reservationCount;
     }
 }
 
