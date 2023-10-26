@@ -47,7 +47,7 @@ public class View {
         Room choiceRoom = hotel.getRoom(choiceNum);
         while (true) {
             if (choiceRoom == null) { //잘못된 방번호일 경우
-                System.out.println("잘못된 방 번호입니다. 다시 입력해주세요");
+                System.out.println("잘못된 방 번호입니다. 다시 입력해주세요\n");
                 selectRoom();
                 choiceNum = sc.nextInt();
                 sc.nextLine();
@@ -60,8 +60,6 @@ public class View {
         }
 
     }
-
-
     public void printReservationRoom(Hotel hotel, int choice) {
         //선택한 객실 정보 출력
         Room choiceRoom = hotel.getRoom(choice);
@@ -70,7 +68,7 @@ public class View {
                 System.out.printf("%-8d%-16s%-10d\n", choiceRoom.getRoomNumber(), choiceRoom.getRoomSize(), choiceRoom.getRoomPrice());
             }
         }
-        System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***");
+        System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***\n");
         System.out.println("1. 예약 확인   2. 방 재선택   3. 전체취소\n");
 
     }
@@ -93,34 +91,33 @@ public class View {
 
     public void checkReservation(Hotel hotel) {
 
-        System.out.println("*** 예약번호를 입력해주세요 ***");
+        System.out.println("*** 예약번호를 입력해주세요 ***\n");
         String custom_uuid = sc.nextLine();
-        System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***");
+        System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
         hotel.checkReservationCustomer(custom_uuid);
-        //[ 예약자 이름 ]
-        //[ 예약자 전화번호 ]
-        //[ 예약 일시 ]
-        //[ 예약 룸 정보 ]
 
-        System.out.println("1. 예약 확인         2. 예약 취소");
+        System.out.println("1. 예약 확인         2. 예약 취소\n");
     }
 
     public void cancelConfirmReservation() {
-        System.out.println(" *** 정말로 취소하시겠습니까? ***");
-        System.out.println("1. 확인         2. 취소");
+        System.out.println(" *** 정말로 취소하시겠습니까? ***\n");
+        System.out.println("1. 확인         2. 취소\n");
     }
 
     public void cancelReservation(Hotel hotel){
+        System.out.println("*** 예약번호를 입력해주세요 ***\n");
+        String custom_uuid = sc.nextLine();
+        hotel.removeReservation(custom_uuid);
     }
 
     public void printAllReservation(Hotel hotel) {
-        System.out.println("*** 호텔의 전체 예약 목록입니다. ***");
+        System.out.println("*** 호텔의 전체 예약 목록입니다. ***\n");
         hotel.checkReservationHotel();
         System.out.println("\n");
-        System.out.println("호텔의 전체 예약 건수 : %d");
-        System.out.println("보유자산: %d");
+        System.out.printf("호텔의 전체 예약 건수 : %d\n");
+        System.out.printf("보유자산: %d\n",hotel.getAsset());
 
-        System.out.println("다시 돌아가려면 아무키나 입력하세요");
+        System.out.println("다시 돌아가려면 아무키나 입력하세요\n");
     }
 
 
