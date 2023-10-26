@@ -8,6 +8,11 @@ public class Room {
     private int roomPrice; // standard 5만원, Twin 10만원, Deluxe 15만원, Suite 40만원
     private ArrayList<Date> roomDateList = new ArrayList<>(); // 방의 날짜별 예약을 위한 날짜 list
 
+    public Room(int roomNumber, String roomSize, int roomPrice) {
+        this.roomNumber = roomNumber;
+        this.roomSize = roomSize;
+        this.roomPrice = roomPrice;
+    }
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -16,6 +21,9 @@ public class Room {
     }
     public int getRoomPrice() {
         return roomPrice;
+    }
+    public void setRoomPrice(int roomPrice) {
+        this.roomPrice = roomPrice;
     }
     public Room(int roomNumber, String roomSize, int roomPrice) {
         this.roomNumber = roomNumber;

@@ -89,7 +89,6 @@ public class View {
         System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
         hotel.addReservation(newReservation);
         //customer에 예약번호 세팅
-        System.out.println("test");
     }
 
     public void checkReservation(Hotel hotel) {
