@@ -88,6 +88,7 @@ public class View {
     }
 
     public void cancelReservation(Hotel hotel){
+      //  hotel.removeReservation();
     }
 
     public void printAllReservation(Hotel hotel) {

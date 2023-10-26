@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Hotel {
-    private int asset;
+    private int asset = 0;
     private int reservationCount = 0;
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
@@ -25,22 +25,20 @@ public class Hotel {
     }
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
+        this.reservationCount++;
     }
 
     public void removeReservation(String reservationNumber) {
         this.reservationMap.remove(reservationNumber);
     }
 
-    public void checkReservationCustomer(String reservationNumber) {
+    public Reservation checkReservationCustomer(String reservationNumber) {
         for (String s : reservationMap.keySet()) {
             if (s.equals(reservationNumber)) {
-                System.out.println("Name : " + reservationMap.get(s).getCustomer().getCustomerName() + " | " +
-                        "Phone Number : " + reservationMap.get(s).getCustomer().getCustomerPhoneNumber() + " | " +
-                        "Room Number : " + reservationMap.get(s).getRoom().getRoomNumber() + " | " +
-                        "ReservationNumber : " + reservationNumber
-                );
+                    return reservationMap.get(s);
             }
         }
+        return null;
     }
 
     public void checkReservationHotel() {
@@ -60,7 +58,6 @@ public class Hotel {
     public void addAsset(){
         for (String s : reservationMap.keySet()) {
             this.asset += reservationMap.get(s).getRoom().getRoomPrice();
-            this.reservationCount++;
         }
     }
 }
