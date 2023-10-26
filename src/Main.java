@@ -27,7 +27,7 @@ public class Main {
                         sc.nextLine();
                         if (confirmCheck == 1) {
                             //예약리스트에 add하는 메서드
-                            consoleView.printReservationResult(customer);//
+                            consoleView.addReservation(hotel,customer,selectRoomNum);
                             break;
                         } else if (confirmCheck == 2) {
                             continue;
@@ -35,22 +35,22 @@ public class Main {
                             break;
                         }
                     }
-
                     break;
 
                 case 2: // 예약수정 및 조회
-                    consoleView.checkReservation();
+                    consoleView.checkReservation(hotel);
                     int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
                     sc.nextLine();
 
                     if (confirmReservationSearch == 1) {
                         break;
                     } else if (confirmReservationSearch == 2) {
-                        consoleView.cancelReservation();
+                        consoleView.cancelConfirmReservation();
                         int cancelConfirm = sc.nextInt();
                         sc.nextLine();
                         if (cancelConfirm == 1) {
                             // 예약정보를 지우는 부분
+                            consoleView.cancelReservation(hotel);
                             break;
                         } else if (cancelConfirm == 2) {
                             break;
@@ -64,7 +64,7 @@ public class Main {
 
 
                 case 3: // 호텔관리
-                    consoleView.printAllReservation();
+                    consoleView.printAllReservation(hotel);
                     sc.nextLine();
                     break;
 

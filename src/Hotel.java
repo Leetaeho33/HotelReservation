@@ -2,14 +2,12 @@ import java.util.*;
 
 public class Hotel {
     private int asset;
-    Reservation reservation;
-    public List<Room> getRoomList() {
-        return roomList;
-    }
-
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
 
+    public List<Room> getRoomList() {
+        return roomList;
+    }
 
     public void addRoom(Room room) {
         this.roomList.add(room);
@@ -22,8 +20,8 @@ public class Hotel {
             }
         }
         return null;
-    }
 
+    }
     public void addReservation(Reservation reservation) {
         reservationMap.put(reservation.getReservationNumber(), reservation);
     }
