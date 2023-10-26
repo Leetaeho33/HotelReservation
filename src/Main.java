@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Main {
     static Hotel hotel = new Hotel();
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -21,38 +22,41 @@ public class Main {
             switch (checkCustom) {
                 case 1:
                     Customer customer = consoleView.getCustomerinfo(); // 고객정보를 입력받는 view
-                    while(true) {
+                    while (true) {
                         consoleView.printRoom(hotel);
                         consoleView.selectRoom();
                         int selectRoomNum = sc.nextInt();
                         sc.nextLine();
-                        consoleView.confirmReservation(hotel, selectRoomNum);//
+                        Room customerChoiceRoom = consoleView.confirmReservation(hotel, selectRoomNum);//
                         int confirmCheck = sc.nextInt();
                         sc.nextLine();
                         if (confirmCheck == 1) {
                             //예약리스트에 add하는 메서드
-                            consoleView.printReservationResult(customer);//
+                            consoleView.addReservation(hotel,customer,customerChoiceRoom);
                             break;
                         } else if (confirmCheck == 2) {
                             continue;
+                        } else {
+                            break;
                         }
-                        else{break;}
                     }
 
                     break;
 
                 case 2: // 예약수정 및 조회
-                    consoleView.checkReservation();
+                    consoleView.checkReservation(hotel);
                     int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
                     sc.nextLine();
 
-                    if(confirmReservationSearch == 1){break;}
-                    else if(confirmReservationSearch == 2) {
-                        consoleView.cancelReservation();
+                    if (confirmReservationSearch == 1) {
+                        break;
+                    } else if (confirmReservationSearch == 2) {
+                        consoleView.cancelConfirmReservation();
                         int cancelConfirm = sc.nextInt();
                         sc.nextLine();
                         if (cancelConfirm == 1) {
                             // 예약정보를 지우는 부분
+                            consoleView.cancelReservation(hotel);
                             break;
                         } else if (cancelConfirm == 2) {
                             break;
@@ -60,12 +64,13 @@ public class Main {
                         } else {
                             break;
                         }
+                    } else {
+                        break;
                     }
-                    else {break;}
 
 
                 case 3: // 호텔관리
-                    consoleView.printAllReservation();
+                    consoleView.printAllReservation(hotel);
                     sc.nextLine();
                     break;
 
@@ -75,6 +80,7 @@ public class Main {
             }
         }
     }
+
     public static void init() {
         Room standard_101 = new Room(101, "Standard", 5);
         Room standard_102 = new Room(102, "Standard", 5);
@@ -120,7 +126,6 @@ public class Main {
         hotel.addRoom(suite_404);
         hotel.addRoom(suite_405);
     }
-
 
 
 }
