@@ -16,7 +16,6 @@ public class View {
     }
 
     public Customer getCustomerinfo() {
-
         System.out.println("고객님의 성함을 입력하세요: ");
         String customName = sc.nextLine();
         System.out.println("고객님의 전화번호 입력하세요: ");
@@ -30,6 +29,7 @@ public class View {
 
     public void printRoom(Hotel hotel) {
 
+
         System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
         for (Room ht_rm : hotel.getRoomList()) {
             System.out.printf("%-8d%-16s%-10d\n", ht_rm.getRoomNumber(), ht_rm.getRoomSize(), ht_rm.getRoomPrice());
@@ -41,11 +41,30 @@ public class View {
     }
 
 
-    public void confirmReservation(Hotel hotel, int choice) {
+    public int inputRoomNum(Hotel hotel) {
+        int choiceNum = sc.nextInt();
+        sc.nextLine();
+        Room choiceRoom = hotel.getRoom(choiceNum);
+        while (true) {
+            if (choiceRoom == null) { //잘못된 방번호일 경우
+                System.out.println("잘못된 방 번호입니다. 다시 입력해주세요");
+                selectRoom();
+                choiceNum = sc.nextInt();
+                sc.nextLine();
+                choiceRoom = hotel.getRoom(choiceNum);
+            }
+            else //올바론 방번호일경우
+            {
+                return choiceNum;
+            };
+        }
+
+    }
+
+
+    public void printReservationRoom(Hotel hotel, int choice) {
         //선택한 객실 정보 출력
-
         Room choiceRoom = hotel.getRoom(choice);
-
         for (Room ht_rm : hotel.getRoomList()) {
             if (ht_rm.getRoomNumber() == choice) {
                 System.out.printf("%-8d%-16s%-10d\n", choiceRoom.getRoomNumber(), choiceRoom.getRoomSize(), choiceRoom.getRoomPrice());
@@ -53,13 +72,19 @@ public class View {
         }
         System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***");
         System.out.println("1. 예약 확인   2. 방 재선택   3. 전체취소\n");
+
     }
+
 
     public void addReservation(Hotel hotel, Customer customer, int choiceNum) {
         //System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
         Date nowDate = new Date();//String을 입력받아서 Date형식으로 반환
         Reservation tempReservation = new Reservation();
         Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(choiceNum), nowDate);
+        //null이 들어오면 초기화면이나 다른화면으로 돌아가게 짠다.
+
+        if(newReservation == null) {return;}
+
         System.out.println("*** 예약이 완료되었습니다.***\n");
         System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
         hotel.addReservation(newReservation);
@@ -71,10 +96,8 @@ public class View {
 
         System.out.println("*** 예약번호를 입력해주세요 ***");
         String custom_uuid = sc.nextLine();
-
-
-        hotel.checkReservationCustomer(custom_uuid);
         System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***");
+        hotel.checkReservationCustomer(custom_uuid);
         //[ 예약자 이름 ]
         //[ 예약자 전화번호 ]
         //[ 예약 일시 ]
