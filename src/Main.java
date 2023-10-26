@@ -20,9 +20,8 @@ public class Main {
                     while (true) {
                         consoleView.printRoom(hotel);
                         consoleView.selectRoom();
-                        int selectRoomNum = sc.nextInt();
-                        sc.nextLine();
-                        consoleView.confirmReservation(hotel, selectRoomNum);//
+                        int selectRoomNum = consoleView.inputRoomNum(hotel);
+                        consoleView.printReservationRoom(hotel, selectRoomNum);//
                         int confirmCheck = sc.nextInt();
                         sc.nextLine();
                         if (confirmCheck == 1) {
@@ -41,7 +40,6 @@ public class Main {
                     consoleView.checkReservation(hotel);
                     int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
                     sc.nextLine();
-
                     if (confirmReservationSearch == 1) {
                         break;
                     } else if (confirmReservationSearch == 2) {
