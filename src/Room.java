@@ -22,12 +22,11 @@ public class Room {
     public int getRoomPrice() {
         return roomPrice;
     }
-    public void setRoomPrice(int roomPrice) {
-        this.roomPrice = roomPrice;
+
+    public ArrayList<Date> getRoomDateList() {
+        return roomDateList;
     }
-    public Room(int roomNumber, String roomSize, int roomPrice) {
-        this.roomNumber = roomNumber;
-        this.roomSize = roomSize;
+    public void setRoomPrice(int roomPrice) {
         this.roomPrice = roomPrice;
     }
     public boolean checkRoomReservation(Date date){         //룸 예약 가능 확인 메소드
