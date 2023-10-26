@@ -10,9 +10,6 @@ public class Hotel {
     private List<Room> roomList = new ArrayList<>();
     private Map<String, Reservation> reservationMap = new HashMap<>();
 
-    public List<Room> getRoomList() {
-        return roomList;
-    }
 
     public void addRoom(Room room) {
         this.roomList.add(room);
