@@ -65,17 +65,15 @@ public class Hotel {
 
     public List<Room> getPossibleRoomList(Date date){
 
-        LocalDate localDate = dateToLocalDate(date); //Date타입을 LocalDate타입으로 변환해주는 함수
-
+        //LocalDate localDate = dateToLocalDate(date); //Date타입을 LocalDate타입으로 변환해주는 함수
         List<Room> possibleRoomList = new ArrayList<>();
         for (Room r : this.roomList) {
             if(r.getRoomDateList().isEmpty()){
                 possibleRoomList.add(r);
             } else {
                 for (Date d : r.getRoomDateList()) {
-
-                    LocalDate locald = dateToLocalDate(d);
-                    if(locald.compareTo(localDate) != 0){
+                    //LocalDate locald = dateToLocalDate(d);
+                    if(d.compareTo(date) != 0){
                         possibleRoomList.add(r);
                     }
                 }
@@ -98,13 +96,6 @@ public class Hotel {
         return reservationCount;
     }
 
-    public LocalDate dateToLocalDate(Date date){
-
-        Instant instant = date.toInstant();// Instant를 ZoneId와 LocalDate로 변환
-        ZoneId zoneId = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
-        LocalDate locDate = instant.atZone(zoneId).toLocalDate();
-        return locDate;
-    }
 
 }
 

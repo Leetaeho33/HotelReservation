@@ -1,3 +1,6 @@
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +12,7 @@ import java.util.Date;
 public class View {
 
     Date customerDate;
+    String tempCustomerUid;
 
     Scanner sc = new Scanner(System.in);
 
@@ -96,17 +100,26 @@ public class View {
         hotel.addReservation(newReservation);
     }
 
+    public Reservation inputReservationNumber(Hotel hotel){
+        System.out.println("*** 예약번호를 입력해주세요 ***\n");
+        String custom_uuid = sc.nextLine();
+        this.tempCustomerUid = custom_uuid;
+        Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
+        return preReservation;
+    }
+
     public void checkReservation(Hotel hotel) {
         while(true) {
-            System.out.println("*** 예약번호를 입력해주세요 ***\n");
-            String custom_uuid = sc.nextLine();
-            Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
-            if(preReservation != null) {
+            Reservation customerReservation = inputReservationNumber(hotel);
+            if(customerReservation != null) {
                 System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
-                System.out.printf("예약번호 : %-40s| 고객이름 : %-5s| 예약날짜 : %-15s | 예약한 방 정보 : %-5d%-5s%-5d |\n",
-                        preReservation.getReservationNumber(),preReservation.getCustomer().getCustomerName(),
-                        preReservation.getReservationDate(), preReservation.getRoom().getRoomNumber(),
-                        preReservation.getRoom().getRoomSize(), preReservation.getRoom().getRoomPrice());
+                System.out.println(
+                        "예약날짜 : " + customerReservation.getReservationDate() + " | " +
+                                "예약자 성명 : " + customerReservation.getCustomer().getCustomerName() + " | " +
+                                "전화번호 : " + customerReservation.getCustomer().getCustomerPhoneNumber() + " | " +
+                                "객실호수 : " + customerReservation.getRoom().getRoomNumber() + " | " +
+                                "예약번호 : " + customerReservation.getReservationNumber()
+                );
                 break;
             }
             else {
@@ -123,19 +136,17 @@ public class View {
     }
 
     public void cancelReservation(Hotel hotel){
-        String custom_uuid;
-        while(true){
-        System.out.println("*** 예약번호를 입력해주세요 ***\n");
-        custom_uuid = sc.nextLine();
-        Reservation canceledReservation = hotel.checkReservationCustomer(custom_uuid);
-        if(canceledReservation == null) {
-            System.out.println("잘못된 예약번호입니다.");
-        }
-
-        else{
-            break;
-            }
-        }
+        String custom_uuid = this.tempCustomerUid;
+//        while(true){
+//        Reservation customerReservation = inputReservationNumber(hotel);
+//        if(customerReservation == null) {
+//            System.out.println("잘못된 예약번호입니다.");
+//        }
+//
+//        else{
+//            break;
+//            }
+//        }
         hotel.removeReservation(custom_uuid);
         System.out.println("예약이 취소됐습니다.");
     }
@@ -163,6 +174,15 @@ public class View {
         }
         return null;
     }
+
+    public LocalDate dateToLocalDate(Date date){ // Date를 받아서 LocalDate
+
+        Instant instant = date.toInstant();// Instant를 ZoneId와 LocalDate로 변환
+        ZoneId zoneId = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
+        LocalDate locDate = instant.atZone(zoneId).toLocalDate();
+        return locDate;
+    }
+
 }
 
 
