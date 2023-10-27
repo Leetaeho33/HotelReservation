@@ -30,7 +30,7 @@ public class Hotel {
     public void addReservation(Reservation reservation) {
         this.reservationMap.put(reservation.getReservationNumber(), reservation);
         this.reservationCount += 1;
-        this.addAsset(reservation.getReservationNumber());                          //예약 맵에 추가시 호텔 자산 증가
+        this.addAsset(reservation.getReservationNumber());                         //예약 맵에 추가시 호텔 자산 증가
     }
 
     public void removeReservation(String reservationNumber) {
