@@ -71,11 +71,8 @@ public class Hotel {
             if(r.getRoomDateList().isEmpty()){
                 possibleRoomList.add(r);
             } else {
-                for (Date d : r.getRoomDateList()) {
-                    //LocalDate locald = dateToLocalDate(d);
-                    if(d.compareTo(date) != 0){
-                        possibleRoomList.add(r);
-                    }
+                if(!r.getRoomDateList().contains(date)){
+                    possibleRoomList.add(r);
                 }
             }
         }

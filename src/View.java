@@ -73,7 +73,6 @@ public class View {
                 return choiceNum;
             };
         }
-
     }
     public void printReservationRoom(Hotel hotel, int choice) {
         //선택한 객실 정보 출력
@@ -85,9 +84,7 @@ public class View {
         }
         System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***\n");
         System.out.println("1. 예약 확인   2. 방 재선택   3. 전체취소\n");
-
     }
-
 
     public void addReservation(Hotel hotel, Customer customer, int roomChoiceNum) {
         Reservation tempReservation = new Reservation();
@@ -108,7 +105,7 @@ public class View {
         return preReservation;
     }
 
-    public void checkReservation(Hotel hotel) {
+    public int checkReservation(Hotel hotel) {
         while(true) {
             Reservation customerReservation = inputReservationNumber(hotel);
             if(customerReservation != null) {
@@ -120,14 +117,21 @@ public class View {
                                 "객실호수 : " + customerReservation.getRoom().getRoomNumber() + " | " +
                                 "예약번호 : " + customerReservation.getReservationNumber()
                 );
-                break;
+                System.out.println("1. 예약 확인         2. 예약 취소\n");
+                int confirmReservation = sc.nextInt();
+                sc.nextLine();
+                return confirmReservation;
             }
             else {
+                if(this.tempCustomerUid.equals("q")){
+                    return 0;
+                }
                 System.out.println("잘못된 예약번호입니다.");
+                System.out.println("돌아가시려면 q를 눌러주세요\n");
+
             }
         }
 
-        System.out.println("1. 예약 확인         2. 예약 취소\n");
     }
 
     public void cancelConfirmReservation() {
@@ -137,16 +141,6 @@ public class View {
 
     public void cancelReservation(Hotel hotel){
         String custom_uuid = this.tempCustomerUid;
-//        while(true){
-//        Reservation customerReservation = inputReservationNumber(hotel);
-//        if(customerReservation == null) {
-//            System.out.println("잘못된 예약번호입니다.");
-//        }
-//
-//        else{
-//            break;
-//            }
-//        }
         hotel.removeReservation(custom_uuid);
         System.out.println("예약이 취소됐습니다.");
     }
