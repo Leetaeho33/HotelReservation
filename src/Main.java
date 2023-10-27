@@ -37,12 +37,10 @@ public class Main {
                     break;
 
                 case 2: // 예약수정 및 조회
-                    consoleView.checkReservation(hotel);
-                    int confirmReservationSearch = sc.nextInt(); //예약조회 후 확인 or 취소 선택분기
-                    sc.nextLine();
-                    if (confirmReservationSearch == 1) {
+                    int confirmReservationSearch = consoleView.checkReservation(hotel);
+                    if (confirmReservationSearch == 1) { // 1.예약확인을 눌렀을때
                         break;
-                    } else if (confirmReservationSearch == 2) {
+                    } else if (confirmReservationSearch == 2) { //2.예약취소를 눌렀을때
                         consoleView.cancelConfirmReservation();
                         int cancelConfirm = sc.nextInt();
                         sc.nextLine();
@@ -65,6 +63,10 @@ public class Main {
                     consoleView.printAllReservation(hotel);
                     sc.nextLine();
                     break;
+
+                case 0:
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
 
                 default:
                     System.out.println("해당하지않는 번호입니다.");
