@@ -103,7 +103,10 @@ public class View {
             Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
             if(preReservation != null) {
                 System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
-                System.out.printf("%-10s %-20s %-30d\n", preReservation.getCustomer().getCustomerName(), preReservation.getCustomer().getCustomerPhoneNumber(), preReservation.getRoom().getRoomNumber());
+                System.out.printf("예약번호 : %-40s| 고객이름 : %-5s| 예약날짜 : %-15s | 예약한 방 정보 : %-5d%-5s%-5d |\n",
+                        preReservation.getReservationNumber(),preReservation.getCustomer().getCustomerName(),
+                        preReservation.getReservationDate(), preReservation.getRoom().getRoomNumber(),
+                        preReservation.getRoom().getRoomSize(), preReservation.getRoom().getRoomPrice());
                 break;
             }
             else {
@@ -126,13 +129,15 @@ public class View {
         custom_uuid = sc.nextLine();
         Reservation canceledReservation = hotel.checkReservationCustomer(custom_uuid);
         if(canceledReservation == null) {
-                System.out.println("잘못된 예약번호입니다.");
+            System.out.println("잘못된 예약번호입니다.");
         }
+
         else{
             break;
             }
         }
         hotel.removeReservation(custom_uuid);
+        System.out.println("예약이 취소됐습니다.");
     }
 
     public void printAllReservation(Hotel hotel) {
@@ -144,8 +149,6 @@ public class View {
 
         System.out.println("다시 돌아가려면 아무키나 입력하세요\n");
     }
-
-
 
     public Date inputDate(){
         String customDate = sc.nextLine();
