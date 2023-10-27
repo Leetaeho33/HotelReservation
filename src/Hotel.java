@@ -30,7 +30,7 @@ public class Hotel {
     public void addReservation(Reservation reservation) {
         this.reservationMap.put(reservation.getReservationNumber(), reservation);
         this.reservationCount += 1;
-        this.addAsset();
+        this.addAsset(reservation.getReservationNumber());                         //예약 맵에 추가시 호텔 자산 증가
     }
 
     public void removeReservation(String reservationNumber) {
@@ -83,10 +83,8 @@ public class Hotel {
         return asset;
     }
 
-    public void addAsset() {
-        for (String s : reservationMap.keySet()) {
-            this.asset += reservationMap.get(s).getRoom().getRoomPrice();
-        }
+    public void addAsset(String uuid) {
+        this.asset += reservationMap.get(uuid).getRoom().getRoomPrice();    //uuid값을 받아서 해당 예약의 방가격 만큼 호텔 자산 증가
     }
 
     public int getReservationCount() {
