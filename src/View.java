@@ -1,7 +1,6 @@
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.text.ParseException;
@@ -83,7 +82,7 @@ public class View {
             }
         }
         System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***\n");
-        System.out.println("1. 예약 확인   2. 방 재선택   3. 전체취소\n");
+        System.out.println("1. 예약 확인   2. 방 재선택   3. 처음으로\n");
     }
 
     public void addReservation(Hotel hotel, Customer customer, int roomChoiceNum) {
@@ -168,15 +167,6 @@ public class View {
         }
         return null;
     }
-
-    public LocalDate dateToLocalDate(Date date){ // Date를 받아서 LocalDate
-
-        Instant instant = date.toInstant();// Instant를 ZoneId와 LocalDate로 변환
-        ZoneId zoneId = ZoneId.systemDefault(); // 또는 다른 시간대를 사용할 수 있습니다.
-        LocalDate locDate = instant.atZone(zoneId).toLocalDate();
-        return locDate;
-    }
-
 }
 
 

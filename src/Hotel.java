@@ -1,6 +1,3 @@
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 
 public class Hotel {
@@ -24,7 +21,6 @@ public class Hotel {
             }
         }
         return null;
-
     }
 
     public void addReservation(Reservation reservation) {
@@ -34,7 +30,9 @@ public class Hotel {
     }
 
     public void removeReservation(String reservationNumber) {
+        this.asset -= reservationMap.get(reservationNumber).getRoom().getRoomPrice();
         this.reservationMap.remove(reservationNumber);
+        this.reservationCount--;
     }
 
     public Reservation checkReservationCustomer(String reservationNumber) {
