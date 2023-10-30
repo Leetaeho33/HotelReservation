@@ -30,9 +30,13 @@ public class Hotel {
     }
 
     public void removeReservation(String reservationNumber) {
-        this.asset -= reservationMap.get(reservationNumber).getRoom().getRoomPrice();
-        this.reservationMap.remove(reservationNumber);
+        this.asset -= reservationMap.get(reservationNumber).getRoom().getRoomPrice(); // 예약취소 시 호텔 자산 감소// 호텔 에약 수 감소
+        Date date;
+        date = this.reservationMap.get(reservationNumber).getReservationDate();
+        this.reservationMap.get(reservationNumber).getRoom().removeRoomDate(date);    // 예약 취소 방 date
+        this.reservationMap.remove(reservationNumber);                                // 호텔 예약 리스트 삭제
         this.reservationCount--;
+
     }
 
     public Reservation checkReservationCustomer(String reservationNumber) {

@@ -36,4 +36,5 @@ public class Room {
     public void addRoomDate(Date date){
         this.roomDateList.add(date);
     }
+    public void removeRoomDate(Date date) { this.roomDateList.remove(date);}
 }
