@@ -1,198 +1,176 @@
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-
-
-//       스크린: 초기화면
-//            |
-//  입력: 1. 고객    2. 호텔                      3. 예약확인
-//      |               |                              |
-//스크린: 객실화면     스크린: 예약목록조회, 총자산           스크린: 고객정보확인
-//입력: 객실선택(번호)                                   입력: uuid
-//스크린: 고객정보화면                                      스크린: 예약목록
-//입력: 고객정보(고객객체)                                         |
-//   |             |                                  입력: 1. 확인    2. 취소
-//소지금 충분    소지금부족                               스크린: 초기화면   스크린: 초기화면
-//   |             |---------스크린:객실화면으로 돌아가기
-//스크린:예약확인
-//      |
-//입력: 1. 예   2. 취소--------스크린:객실화면으로 돌아가기
-//       |
-//스크린: 예약 완료 && 초기화면으로 돌아가기
-
-
-//1) 예약기능 // 3명(태호/규정 소희)
-//
-//        - 예약 (예약 실패 경우 추가)
-//
-//        - 예약 확인
-//
-//        - 예약 취소
-//
-//        - 전체 예약 확인
-//
-//        - 예약 가능 객실 리스트 조회기능
-//        - 객실리스트/예약 가능한 객실 리스트(날짜별로)/ 예약 된 예약
-//        2) 뷰 // 2명 (준영 /유섭)
-//
-//        - (완)고객 정보 입력페이지(고객 정보 입력)
-//        - 예약 페이지에서 (예약, 예약 확인) 1번 누르면 예약, 2번 누르면 예약 확인페이지
-//        - 예약 날짜 페이지 ( 날짜입력)
-//        - (완)예약 가능 객실 페이지 ( 예약 가능한 객실 리스트 보여주기)
-//        - 예약 확인 페이지(예약) - 예약 결정, 예약 실패
-//        - 전체예약 확인 페이지
-//        날짜에 따른 객실 리스트가 필요가 없다.
-//
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class View {
 
+    Date customerDate;
+    String tempCustomerUid;
+
     Scanner sc = new Scanner(System.in);
-    public void StartView() {
+
+    public void selectMenu() {
         System.out.println("[호텔 예약관리 시스템]");
         System.out.println("--------------------------------------------------------");
         System.out.println("용무에 맞게 선택해주세요");
         System.out.println("1. 객실 예약하기       2. 예약 조회 및 취소     3. 호텔 관리");
     }
 
-
-    public Customer Custominfo(){
-
+    public Customer getCustomerinfo() {
         System.out.println("고객님의 성함을 입력하세요: ");
         String customName = sc.nextLine();
         System.out.println("고객님의 전화번호 입력하세요: ");
         String customPhoneNumber = sc.nextLine();
         System.out.println("고객님의 소지금을 입력하세요: ");
         int customBudget = sc.nextInt();
+        sc.nextLine();
 
-        Customer newCustom = new Customer(customName,customPhoneNumber,customBudget);
-        System.out.println("1.예약하기  2.예약 조회하기");
-
-        return newCustom;
+        return new Customer(customName, customPhoneNumber, customBudget);
     }
 
-    // 예약할 수 있는 객실 보여주기
-    // 분기점 1. 유저가 선택한 번호로 객실 예약
-    //       2. 취소하기
-//    public void EmptyRoomView(Hotel hotel) {
-//        //호텔객체에 멤버변수로 Room객체 리스트가 있는거죠
-//        System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***");
-//        // 메소드 완성 후 다시 진행
-//        // 보여줘야할것 for문 돌리면서 1. 객실 가격 2. 룸사이즈 3. (나중) 예약가능한 룸만
-//
-//        System.out.println("*** 원하시는 객실을 선택해주세요. ***");
-//
-//    }
-
-    public void EmptyRoomView(Hotel hotel, Customer customer) {
-        boolean check = true;
-        while(true) {
-            //호텔객체에 멤버변수로 Room객체 리스트가 있는거죠
-            System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***");
-            // 메소드 완성 후 다시 진행
-            // 보여줘야할것 for문 돌리면서 1. 객실 가격 2. 룸사이즈 3. (나중) 예약가능한 룸만
-
-            System.out.println("*** 원하시는 객실을 선택해주세요. ***");
-
-            int num = sc.nextInt();
-
-            //정보보여주기
-            System.out.println();//자기가 선택한 객실 정보 보여주기
-
-            System.out.println("위 객실로 예약을 진행하시겠습니까?");
-            System.out.println("1. 예약 확인   2. 예약 취소");
-
-
-            //소지금 체크
-//            check = (choicedRoom.getPrice() > customer.getPrice()) ? true : false;
-            System.out.println("----소지금 확인 로직----");
-            System.out.println("소지금이 부족합니다.");
-            if(check == false) continue;
-
-            int ReservedChoice = sc.nextInt();
-            switch (ReservedChoice) {
-                case 1:
-                    System.out.println("예약이 완료되었습니다.");
-                    //예약목록이 추가됩니다.
-                    //uuid 반환되야한다.
-                    System.out.println("예약번호를 화면에 반환");
-                    return;
-                case 2:
-                    System.out.println("예약이 취소됐습니다.");
-                    break;//break
-                default:
-                    System.out.println("올바르지않은 입력입니다.");
-                    break;
-            }
-        }
-    }
-
-    public void searchReservationView(int uid){
-
-        //for문 돌려서 해당하는 uid 객실 search하기
-
-        while(true) {
-            System.out.println("해당하는 예약번호 다음과 같습니다.");
-
-            System.out.println("1.확인완료      2.취소하기");
-
-            int checkCancel = sc.nextInt();
-
-            switch (checkCancel) {
-
-                case 1:
-                    //
-                    return;
-
-                case 2:
-                    //취소 구현
-                    return;
-
-                default:
-                    System.out.println("올바르지않은 입력입니다.");
-                    break;
-
-            }
+    public void printRoom(Hotel hotel) {
+        while (true) {
+            System.out.println("예약하실 날짜를 입력해주세요 (ex)\"2023-10-25\"형식 : ");
+            this.customerDate = inputDate();
+            if (customerDate != null) break;
         }
 
+        System.out.println("customerDate:" + customerDate);
+        System.out.println("*** 예약하실 수 있는 객실의 목록입니다. ***\n");
+        List<Room> canPossibleRoom =  hotel.getPossibleRoomList(customerDate);
+        for (Room hotelRoom : canPossibleRoom) {
+            System.out.printf("%-8d%-16s%-10d\n", hotelRoom.getRoomNumber(), hotelRoom.getRoomSize(), hotelRoom.getRoomPrice());
+        }
 
     }
 
-
-//
-//    public void ReserveRoomView(Room myRoom){
-//        System.out.println();//자기가 선택한 객실 정보 보여주기
-//        System.out.println("위 객실로 예약을 진행하시겠습니까?");
-//        System.out.println("1. 예약 확인   2. 예약 취소");
-//
-//        int ReservedChoice = sc.nextInt();
-//
-//        if(ReservedChoice == 1) CompleteReservationView(myRoom);
-//        else if(ReservedChoice == 2)
-//
-//
-//
-//
-//    }
-//
-//    public int CompleteReservationView(Room reservedRoom) {
-//        System.out.println("예약이 완료되었습니다.");
-//        System.out.println(/*고객님의 예약 번호는 reservedRoom.getuuid 입니다*/);
-//    }
-//
+    public void selectRoom() {
+        System.out.println("*** 원하시는 객실을 선택해주세요. ***\n");
+    }
 
 
-//    private void showHotelRoom(List<Room> hotelRoom){
-//    }
-//
-//    private void showReservationableHotelRoom(String date){
-//
-//    }
-//
-//    private void greeting(){
-//
-//    }
-//    private void
+    public int inputRoomNum(Hotel hotel) {
+        int choiceNum = sc.nextInt();
+        sc.nextLine();
+        Room choiceRoom = hotel.getRoom(choiceNum);
+        while (true) {
+            if (choiceRoom == null) { //잘못된 방번호일 경우
+                System.out.println("잘못된 방 번호입니다. 다시 입력해주세요\n");
+                selectRoom();
+                choiceNum = sc.nextInt();
+                sc.nextLine();
+                choiceRoom = hotel.getRoom(choiceNum);
+            }
+            else //올바론 방번호일경우
+            {
+                return choiceNum;
+            };
+        }
+    }
+    public void printReservationRoom(Hotel hotel, int choice) {
+        //선택한 객실 정보 출력
+        Room choiceRoom = hotel.getRoom(choice);
+        for (Room hotelRoom : hotel.getRoomList()) {
+            if (hotelRoom.getRoomNumber() == choice) {
+                System.out.printf("%-8d%-16s%-10d\n", choiceRoom.getRoomNumber(), choiceRoom.getRoomSize(), choiceRoom.getRoomPrice());
+            }
+        }
+        System.out.println("*** 선택하신 위 객실로 예약을 진행하시겠습니까? ***\n");
+        System.out.println("1. 예약 확인   2. 방 재선택   3. 처음으로\n");
+    }
 
+    public void addReservation(Hotel hotel, Customer customer, int roomChoiceNum) {
+        Reservation tempReservation = new Reservation();
+        Reservation newReservation = tempReservation.makeReservation(customer, hotel.getRoom(roomChoiceNum), this.customerDate);
 
+        if(newReservation == null) {return;}
+
+        System.out.println("*** 예약이 완료되었습니다.***\n");
+        System.out.printf("예약번호는 %s 입니다.\n", newReservation.getReservationNumber());
+        hotel.addReservation(newReservation);
+    }
+
+    public Reservation inputReservationNumber(Hotel hotel){
+        System.out.println("*** 예약번호를 입력해주세요 ***\n");
+        String custom_uuid = sc.nextLine();
+        this.tempCustomerUid = custom_uuid;
+        Reservation preReservation = hotel.checkReservationCustomer(custom_uuid);
+        return preReservation;
+    }
+
+    public int checkReservation(Hotel hotel) {
+        while(true) {
+            Reservation customerReservation = inputReservationNumber(hotel);
+            if(customerReservation != null) {
+                System.out.println("*** 해당하는 예약 정보는 다음과 같습니다. ***\n");
+                System.out.println(
+                        "예약날짜 : " + customerReservation.getReservationDate() + " | " +
+                                "예약자 성명 : " + customerReservation.getCustomer().getCustomerName() + " | " +
+                                "전화번호 : " + customerReservation.getCustomer().getCustomerPhoneNumber() + " | " +
+                                "객실호수 : " + customerReservation.getRoom().getRoomNumber() + " | " +
+                                "예약번호 : " + customerReservation.getReservationNumber()
+                );
+                System.out.println("1. 예약 확인         2. 예약 취소\n");
+                int confirmReservation = sc.nextInt();
+                sc.nextLine();
+                return confirmReservation;
+            }
+            else {
+                if(this.tempCustomerUid.equals("q")){
+                    return 0;
+                }
+                System.out.println("잘못된 예약번호입니다.");
+                System.out.println("돌아가시려면 q를 눌러주세요\n");
+
+            }
+        }
+
+    }
+
+    public void cancelConfirmReservation() {
+        System.out.println(" *** 정말로 취소하시겠습니까? ***\n");
+        System.out.println("1. 확인         2. 취소\n");
+    }
+
+    public void cancelReservation(Hotel hotel){
+        String custom_uuid = this.tempCustomerUid;
+        hotel.removeReservation(custom_uuid);
+        System.out.println("예약이 취소됐습니다.");
+    }
+
+    public void printAllReservation(Hotel hotel) {
+        System.out.println("*** 호텔의 전체 예약 목록입니다. ***\n");
+        hotel.checkReservationHotel();
+        System.out.println("\n");
+        System.out.printf("호텔의 전체 예약 건수 : %d\n", hotel.getReservationCount());
+        System.out.printf("보유자산: %d\n",hotel.getAsset());
+
+        System.out.println("다시 돌아가려면 아무키나 입력하세요\n");
+    }
+
+    public Date inputDate(){
+        String customDate = sc.nextLine();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(customDate); // 문자열을 Date로 변환
+            String date_str = dateFormat.format(date);
+            System.out.println("고객님이 선택하신 날짜는 : " + date_str + "입니다.\n");
+            return date;
+        } catch (ParseException e) {
+            System.out.println("올바른 날짜 형식이 아닙니다.\n");
+        }
+        return null;
+    }
 }
+
+
+
+
+
+
